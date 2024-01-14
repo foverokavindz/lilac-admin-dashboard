@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import logo from './assets/Lilac-mini-logo-transparent.png';
+import logo from './assets/Lilac-mini-logo-transparent-white.png';
 
 const sidebarData = [
   {
@@ -95,23 +95,47 @@ const sidebarData = [
 
 const Sidebar = () => {
   return (
-    <div className="flex flex-col w-full h-full items-center  ">
-      <img className="w-20 " src={logo} alt="Your Company" />
+    <div className="flex flex-col w-full h-full items-center  bg-slate-900 pt-10">
+      <img className="w-28 " src={logo} alt="Your Company" />
 
-      <div className="flex flex-col w-full mt-10">
-        {sidebarData.map((item) => {
-          return (
-            <div key={item.key}>
-              <a
-                href="#"
-                className="flex gap-6 text-base font-normal py-4 hover:bg-gray-200 pl-10 pr-6"
-              >
-                {item.icon}
-                {item.name}
-              </a>
-            </div>
-          );
-        })}
+      <div className="flex flex-col w-full mt-12 justify-between h-full">
+        <div>
+          {sidebarData.map((item) => {
+            return (
+              <div key={item.key}>
+                <a
+                  href="#"
+                  className="flex gap-6 text-base font-normal py-5 hover:bg-slate-800  transition-all pl-10 pr-6 text-white"
+                >
+                  {item.icon}
+                  {item.name}
+                </a>
+              </div>
+            );
+          })}
+        </div>
+        <div>
+          <a
+            href="#"
+            className="flex gap-6 text-base font-normal py-5 hover:bg-slate-800  transition-all pl-10 pr-6 text-white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"
+              />
+            </svg>
+            Help
+          </a>
+        </div>
       </div>
     </div>
   );

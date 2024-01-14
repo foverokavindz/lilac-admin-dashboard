@@ -6,7 +6,7 @@ import ContentSpace from '../components/ContentSpace';
 const Dashboard = () => {
   return (
     <div className="flex flex-row h-screen">
-      <div className="w-64  bg-gray-100 pt-10 rounded-r-2xl">
+      <div className="w-64  rounded-r-2xl">
         {/* sidebar */}
         <Sidebar />
       </div>

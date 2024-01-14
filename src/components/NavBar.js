@@ -1,7 +1,6 @@
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import logo from './assets/Lilac-mini-logo-transparent.png';
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
