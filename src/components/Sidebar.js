@@ -105,7 +105,7 @@ const Sidebar = () => {
               <div key={item.key}>
                 <a
                   href="#"
-                  className="flex gap-6 text-base font-normal py-5 hover:bg-slate-800  transition-all pl-10 pr-6 text-white"
+                  className="flex gap-8 text-base font-normal py-5 hover:bg-slate-800 rounded-3xl transition-all pl-10 pr-6 text-white"
                 >
                   {item.icon}
                   {item.name}
@@ -117,7 +117,7 @@ const Sidebar = () => {
         <div>
           <a
             href="#"
-            className="flex gap-6 text-base font-normal py-5 hover:bg-slate-800  transition-all pl-10 pr-6 text-white"
+            className="flex gap-8 text-base font-normal py-5 hover:bg-slate-800  transition-all pl-10 pr-6 text-white"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
