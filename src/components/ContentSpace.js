@@ -1,8 +1,8 @@
 import React from 'react';
 
-const ContentSpace = () => {
+const ContentSpace = ({ children }) => {
   return (
-    <div className="mx-4 bg-gray-50 h-full rounded-2xl p-5">ContentSpace</div>
+    <div className="mx-4 p-10 bg-gray-50 h-full rounded-2xl">{children}</div>
   );
 };
 

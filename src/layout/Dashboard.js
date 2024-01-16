@@ -2,6 +2,12 @@ import React from 'react';
 import NavBar from '../components/NavBar';
 import Sidebar from '../components/Sidebar';
 import ContentSpace from '../components/ContentSpace';
+import { Route, Routes } from 'react-router-dom';
+import Order from '../pages/order';
+import Overview from '../pages/overview';
+import Product from '../pages/product';
+import User from '../pages/user';
+import Help from '../pages/help';
 
 const Dashboard = () => {
   return (
@@ -18,7 +24,17 @@ const Dashboard = () => {
         </div>
         <div className="h-full mb-5">
           {/* content  */}
-          <ContentSpace />
+          <ContentSpace>
+            {
+              <Routes>
+                <Route path="/" element={<Overview />} />
+                <Route path="/user" element={<User />} />
+                <Route path="/product" element={<Product />} />
+                <Route path="/order" element={<Order />} />
+                <Route path="/help" element={<Help />} />
+              </Routes>
+            }
+          </ContentSpace>
         </div>
       </div>
     </div>

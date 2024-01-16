@@ -1,12 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import logo from './assets/Lilac-mini-logo-transparent-white.png';
+import { NavLink } from 'react-router-dom';
 
 const sidebarData = [
   {
     key: 1,
     name: 'Overview',
-    href: '#',
+    href: '/',
     current: true,
     icon: (
       <svg
@@ -25,10 +26,11 @@ const sidebarData = [
       </svg>
     ),
   },
+
   {
     key: 2,
     name: 'Users',
-    href: '#',
+    href: '/user',
     current: false,
     icon: (
       <svg
@@ -50,7 +52,7 @@ const sidebarData = [
   {
     key: 3,
     name: 'Products',
-    href: '#',
+    href: '/product',
     current: false,
     icon: (
       <svg
@@ -72,7 +74,7 @@ const sidebarData = [
   {
     key: 4,
     name: 'Orders',
-    href: '#',
+    href: '/order',
     current: false,
     icon: (
       <svg
@@ -93,30 +95,39 @@ const sidebarData = [
   },
 ];
 
+const linkStyle = {
+  active:
+    'flex gap-8 text-base font-normal py-5 bg-gray-700 hover:bg-gray-600 rounded-3xl transition-all pl-10 pr-6 text-white font-medium',
+  notActive:
+    'flex gap-8 text-base font-normal py-5 hover:bg-slate-800 rounded-3xl transition-all pl-10 pr-6 text-white',
+};
+
 const Sidebar = () => {
   return (
     <div className="flex flex-col w-full h-full items-center  bg-slate-900 pt-10">
       <img className="w-28 " src={logo} alt="Your Company" />
 
-      <div className="flex flex-col w-full mt-12 justify-between h-full">
+      <div className="flex flex-col w-full mt-12 justify-between h-full px-2">
         <div>
           {sidebarData.map((item) => {
             return (
               <div key={item.key}>
-                <a
-                  href="#"
-                  className="flex gap-8 text-base font-normal py-5 hover:bg-slate-800 rounded-3xl transition-all pl-10 pr-6 text-white"
+                <NavLink
+                  to={item.href}
+                  className={({ isActive }) => {
+                    return isActive ? linkStyle.active : linkStyle.notActive;
+                  }}
                 >
                   {item.icon}
                   {item.name}
-                </a>
+                </NavLink>
               </div>
             );
           })}
         </div>
         <div>
-          <a
-            href="#"
+          <NavLink
+            to={'/help'}
             className="flex gap-8 text-base font-normal py-5 hover:bg-slate-800  transition-all pl-10 pr-6 text-white"
           >
             <svg
@@ -134,7 +145,7 @@ const Sidebar = () => {
               />
             </svg>
             Help
-          </a>
+          </NavLink>
         </div>
       </div>
     </div>
