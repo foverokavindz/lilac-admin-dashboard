@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import NavBar from '../components/NavBar';
 import Sidebar from '../components/Sidebar';
 import ContentSpace from '../components/ContentSpace';
@@ -10,9 +10,13 @@ import User from '../pages/user';
 import Help from '../pages/help';
 
 const Dashboard = () => {
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
   return (
     <div className="flex flex-row h-screen">
-      <div className="w-72 rounded-r-2xl">
+      <div
+        className={`${isSidebarCollapsed ? 'w-24' : 'w-72'}  overflow-hidden`}
+      >
         {/* sidebar */}
         <Sidebar />
       </div>
@@ -22,7 +26,7 @@ const Dashboard = () => {
           {/* navbar */}
           <NavBar />
         </div>
-        <div className="h-full mb-5">
+        <div className="h-full mb-5 overflow-y-scroll">
           {/* content  */}
           <ContentSpace>
             {

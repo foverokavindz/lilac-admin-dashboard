@@ -104,8 +104,8 @@ const linkStyle = {
 
 const Sidebar = () => {
   return (
-    <div className="flex flex-col w-full h-full items-center  bg-slate-900 pt-10">
-      <img className="w-28 " src={logo} alt="Your Company" />
+    <div className="flex flex-col w-full h-full items-center  bg-slate-900 pt-10 min-w-72">
+      <img className="w-24 " src={logo} alt="Your Company" />
 
       <div className="flex flex-col w-full mt-12 justify-between h-full px-2">
         <div>
