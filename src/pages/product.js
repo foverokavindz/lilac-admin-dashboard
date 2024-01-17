@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { addActiveProduct } from '../store/reducers/productSlice';
 import { useDispatch } from 'react-redux';
-import PopupModel from '../components/PopupModel';
+import PopupModal from '../components/PopupModal';
 
 const tableHeaders = [
   { name: 'Image' },
@@ -311,7 +311,7 @@ const Product = () => {
         </div>
       </div>
 
-      <PopupModel
+      <PopupModal
         isOpened={isPopupModelOpened}
         handlePopupClose={toggleIsPopupModelOpened}
       />
