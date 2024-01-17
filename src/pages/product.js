@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
+import { addActiveProduct } from '../store/reducers/productSlice';
+import { useDispatch } from 'react-redux';
 
 const tableHeaders = [
   { name: 'Image' },
   { name: 'Id' },
-
   { name: 'Name' },
   { name: 'Caregories' },
   { name: 'Brand' },
   { name: ' price' },
   { name: 'Featured' },
-
   { name: 'Action' },
 ];
 
@@ -54,6 +54,7 @@ const productData = [
 
 const Product = () => {
   const [allProducts, setAllProducts] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -68,6 +69,8 @@ const Product = () => {
 
     getAllProducts();
   }, []);
+
+  console.log('allProducts  ', allProducts);
 
   return (
     <div className="flex flex-col">
@@ -190,8 +193,43 @@ const Product = () => {
             {/* table body */}
             <tbody>
               {allProducts.map((item, index) => {
+                const {
+                  _id,
+                  name,
+                  image,
+                  brand,
+                  numReviews,
+                  price,
+                  review,
+                  category,
+                  description,
+                  images,
+                  isFeatured,
+                  stock,
+                } = item;
                 return (
-                  <tr class="bg-white hover:bg-gray-50 " key={index}>
+                  <tr
+                    class="bg-white hover:bg-gray-50 cursor-pointer"
+                    key={index}
+                    onClick={() =>
+                      dispatch(
+                        addActiveProduct({
+                          _id,
+                          name,
+                          image,
+                          brand,
+                          numReviews,
+                          price,
+                          review,
+                          category,
+                          description,
+                          images,
+                          isFeatured,
+                          stock,
+                        })
+                      )
+                    }
+                  >
                     <td class="w-4 p-4">
                       <div class="flex items-center">
                         <input
