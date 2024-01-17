@@ -12,9 +12,13 @@ const productSlice = createSlice({
       state.activeProduct = action.payload;
       console.log('state.activeProduct', state.activeProduct);
     },
+    clearActiveProduct: (state, action) => {
+      state.activeProduct = null;
+      console.log('state.activeProduct', state.activeProduct);
+    },
   },
 });
 
-export const { addActiveProduct } = productSlice.actions;
+export const { addActiveProduct, clearActiveProduct } = productSlice.actions;
 
 export default productSlice.reducer;
