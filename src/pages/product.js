@@ -220,29 +220,7 @@ const Product = () => {
                   } = item;
                   // console.log('item     ', item);
                   return (
-                    <tr
-                      class="bg-white hover:bg-gray-50 cursor-pointer"
-                      key={item._id}
-                      onClick={() => {
-                        toggleIsPopupModelOpened();
-                        dispatch(
-                          addActiveProduct({
-                            _id,
-                            name,
-                            image,
-                            brand,
-                            numReviews,
-                            price,
-                            review,
-                            category,
-                            description,
-                            images,
-                            isFeatured,
-                            stock,
-                          })
-                        );
-                      }}
-                    >
+                    <tr class="bg-white hover:bg-gray-50 " key={item._id}>
                       <td class="w-4 p-4">
                         <div class="flex items-center">
                           <input
@@ -259,11 +237,30 @@ const Product = () => {
                         </div>
                       </td>
                       <td>
-                        <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border border-gray-200 m-3">
+                        <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border border-gray-200 m-3 ">
                           <img
                             src={item.image}
                             alt={item.name}
-                            className="h-full w-full object-cover object-center"
+                            className="h-full w-full object-cover object-center cursor-pointer hover:scale-110 hover:rotate-6 transition-all"
+                            onClick={() => {
+                              toggleIsPopupModelOpened();
+                              dispatch(
+                                addActiveProduct({
+                                  _id,
+                                  name,
+                                  image,
+                                  brand,
+                                  numReviews,
+                                  price,
+                                  review,
+                                  category,
+                                  description,
+                                  images,
+                                  isFeatured,
+                                  stock,
+                                })
+                              );
+                            }}
                           />
                         </div>
                       </td>
@@ -286,8 +283,22 @@ const Product = () => {
                       <td class="px-6 py-4">
                         <a
                           href="#"
-                          class="font-medium text-blue-600 hover:underline"
+                          class="font-medium text-slate-800 hover:underline hover:text-gray-800 hover:bg-gray-200  py-3 rounded-xl transition-all px-3 flex justify-center items-center gap-2"
                         >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-5 h-5"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
+                            />
+                          </svg>
                           Edit
                         </a>
                       </td>
