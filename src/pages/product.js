@@ -282,6 +282,25 @@ const Product = () => {
                       </td>
                       <td class="px-6 py-4">
                         <a
+                          onClick={() => {
+                            toggleIsPopupModelOpened();
+                            dispatch(
+                              addActiveProduct({
+                                _id,
+                                name,
+                                image,
+                                brand,
+                                numReviews,
+                                price,
+                                review,
+                                category,
+                                description,
+                                images,
+                                isFeatured,
+                                stock,
+                              })
+                            );
+                          }}
                           href="#"
                           class="font-medium text-slate-800 hover:underline hover:text-gray-800 hover:bg-gray-200  py-3 rounded-xl transition-all px-3 flex justify-center items-center gap-2"
                         >

@@ -1,4 +1,5 @@
 import ProductPreview from '../sections/ProductPreview';
+import UpdateProduct from '../sections/UpdateProduct';
 
 const PopupModel = ({ isOpened, handlePopupClose }) => {
   return (
@@ -43,7 +44,14 @@ const PopupModel = ({ isOpened, handlePopupClose }) => {
 
           {/* Dynamic Content */}
           <div className="py-4 md:p-5 space-y-4 h-full flex-grow  overflow-y-scroll ">
+            {/*
+            
+            
+            
             <ProductPreview />
+            
+            */}
+            <UpdateProduct />
           </div>
 
           <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b  justify-end">
