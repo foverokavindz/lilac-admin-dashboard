@@ -56,10 +56,12 @@ const productData = [
 const Product = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [isPopupModelOpened, setIsPopupModelOpened] = useState(false);
+  const [selectedWindow, setSelectedWindow] = useState('');
   const dispatch = useDispatch();
 
-  const toggleIsPopupModelOpened = () => {
+  const toggleIsPopupModelOpened = (modal) => {
     setIsPopupModelOpened(!isPopupModelOpened);
+    setSelectedWindow(modal);
   };
 
   useEffect(() => {
@@ -81,7 +83,7 @@ const Product = () => {
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         <div className="flex flex-row justify-between items-center w-full">
           <div className="px-4 sm:px-0">
             <h3 className="text-2xl font-semibold leading-7 text-gray-900">
@@ -92,12 +94,46 @@ const Product = () => {
             </p>
           </div>
 
-          <div>
+          <div className="flex flex-row justify-between items-center gap-4">
             <button
-              className="py-4 px-8 drop-shadow-lg bg-gray-800 text-white rounded-xl text-base font-medium "
-              onClick={toggleIsPopupModelOpened}
+              className="py-3 px-7 drop-shadow-lg bg-gray-800 text-white rounded-2xl text-base font-medium flex flex-row gap-3 items-center border-2 hover:bg-gray-100 hover:text-gray-800 border-gray-800 transition-all"
+              onClick={() => toggleIsPopupModelOpened('newProduct')}
             >
-              New product
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v2.25A2.25 2.25 0 0 0 6 10.5Zm0 9.75h2.25A2.25 2.25 0 0 0 10.5 18v-2.25a2.25 2.25 0 0 0-2.25-2.25H6a2.25 2.25 0 0 0-2.25 2.25V18A2.25 2.25 0 0 0 6 20.25Zm9.75-9.75H18a2.25 2.25 0 0 0 2.25-2.25V6A2.25 2.25 0 0 0 18 3.75h-2.25A2.25 2.25 0 0 0 13.5 6v2.25a2.25 2.25 0 0 0 2.25 2.25Z"
+                />
+              </svg>
+              New Category
+            </button>
+            <button
+              className="py-3 px-7 drop-shadow-lg bg-gray-800 text-white rounded-2xl text-base font-medium flex flex-row gap-3 items-center border-2 hover:bg-gray-100 hover:text-gray-800 border-gray-800 transition-all"
+              onClick={() => toggleIsPopupModelOpened('newProduct')}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
+              New Product
             </button>
           </div>
         </div>
@@ -243,7 +279,7 @@ const Product = () => {
                             alt={item.name}
                             className="h-full w-full object-cover object-center cursor-pointer hover:scale-110 hover:rotate-6 transition-all"
                             onClick={() => {
-                              toggleIsPopupModelOpened();
+                              toggleIsPopupModelOpened('productOverview');
                               dispatch(
                                 addActiveProduct({
                                   _id,
@@ -283,7 +319,7 @@ const Product = () => {
                       <td class="px-6 py-4">
                         <a
                           onClick={() => {
-                            toggleIsPopupModelOpened();
+                            toggleIsPopupModelOpened('updateProduct');
                             dispatch(
                               addActiveProduct({
                                 _id,
@@ -333,6 +369,7 @@ const Product = () => {
       <PopupModal
         isOpened={isPopupModelOpened}
         handlePopupClose={toggleIsPopupModelOpened}
+        modal={selectedWindow}
       />
     </>
   );

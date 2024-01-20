@@ -15,18 +15,20 @@ const Dashboard = () => {
   return (
     <div className="flex flex-row h-screen">
       <div
-        className={`${isSidebarCollapsed ? 'w-24' : 'w-72'}  overflow-hidden`}
+        className={`${
+          isSidebarCollapsed ? 'w-24' : 'min-w-72'
+        }  overflow-hidden`}
       >
         {/* sidebar */}
         <Sidebar />
       </div>
 
-      <div className="flex flex-col flex-grow h-full">
+      <div className="flex flex-col flex-grow h-full w-4/5">
         <div className="mb-5 mt-5">
           {/* navbar */}
           <NavBar />
         </div>
-        <div className="h-full mb-5 overflow-y-scroll">
+        <div className="h-full w-full mb-5 overflow-y-scroll">
           {/* content  */}
           <ContentSpace>
             {

@@ -431,16 +431,48 @@ const UpdateProduct = () => {
               <dt className="text-sm font-medium leading-6 text-gray-900">
                 Stock
               </dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                <input
-                  type="text"
-                  placeholder="address"
-                  id="address"
-                  autoComplete="address"
-                  className="block w-full rounded-md border-0 px-5 py-3 text-gray-600 text-base font-medium shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  onChange={handleChnage}
-                  defaultValue={activeProduct.name}
-                />
+              <dd className="mt-1 text-sm leading-6  sm:col-span-2 sm:mt-0 w-3/4">
+                <div class="relative overflow-x-auto rounded-2xl">
+                  <table class="w-full text-sm text-center rtl:text-right text-gray-500 ">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-200 ">
+                      <tr>
+                        <th scope="col" class="px-6 py-3">
+                          Color
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Size
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Stock
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {activeProduct.stock.map((stock) => {
+                        return (
+                          <tr class="bg-gray-100 border-b " key={stock._id}>
+                            <th
+                              scope="row"
+                              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                            >
+                              {stock.color}
+                            </th>
+                            <td class="px-6 py-4">
+                              {stock.sizeCount.map((el) => {
+                                return <p> {el.size} </p>;
+                              })}
+                            </td>
+                            <td class="px-6 py-4">
+                              {stock.sizeCount.map((el) => {
+                                return <p> {el.count} </p>;
+                              })}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               </dd>
             </div>
 
@@ -448,16 +480,38 @@ const UpdateProduct = () => {
               <dt className="text-sm font-medium leading-6 text-gray-900">
                 Make it Featured Product
               </dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                <input
-                  type="text"
-                  placeholder="city"
-                  id="city"
-                  autoComplete="city"
-                  className="block w-full rounded-md border-0 px-5 py-3 text-gray-600 text-base font-medium shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  onChange={handleChnage}
-                  defaultValue={activeProduct.isFeatured ? 'yes' : 'no'}
-                />
+              <dd className="mt-1 text-sm leading-6  sm:col-span-2 sm:mt-0">
+                <div class="flex items-center mb-4">
+                  <input
+                    checked={activeProduct.isFeatured ? true : false}
+                    id="default-radio-2"
+                    type="radio"
+                    value=""
+                    name="default-radio"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
+                  />
+                  <label
+                    for="default-checkbox"
+                    class="ms-2 text-sm font-medium text-gray-700"
+                  >
+                    Featured
+                  </label>
+                </div>
+                <div class="flex items-center">
+                  <input
+                    id="default-radio-1"
+                    type="radio"
+                    value=""
+                    name="default-radio"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
+                  />
+                  <label
+                    for="checked-checkbox"
+                    class="ms-2 text-sm font-medium text-gray-700 "
+                  >
+                    Not Featured
+                  </label>
+                </div>
               </dd>
             </div>
 
