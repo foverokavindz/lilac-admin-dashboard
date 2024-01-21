@@ -97,7 +97,7 @@ const Product = () => {
           <div className="flex flex-row justify-between items-center gap-4">
             <button
               className="py-3 px-7 drop-shadow-lg bg-gray-800 text-white rounded-2xl text-base font-medium flex flex-row gap-3 items-center border-2 hover:bg-gray-100 hover:text-gray-800 border-gray-800 transition-all"
-              onClick={() => toggleIsPopupModelOpened('newProduct')}
+              onClick={() => toggleIsPopupModelOpened('newCategory')}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
