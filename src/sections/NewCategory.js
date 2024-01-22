@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const dummyData = [
   {
@@ -42,8 +42,65 @@ const dummyData = [
 ];
 
 const NewCategory = () => {
-  const handleSubmit = () => {};
-  const handleChnage = () => {};
+  const [formData, setFormData] = useState({});
+  const [allCategoryData, setAllCategoryData] = useState([]);
+  const nameInputRef = useRef(null);
+  const descriptionInputRef = useRef(null);
+
+  const handleChnage = (e) => {
+    setFormData({
+      ...formData,
+      name: nameInputRef.current.value,
+      description: descriptionInputRef.current.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch('http://localhost:3005/api/category/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTlhM2E0MzIzMWZiYjIyNzAyZjNjMDUiLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE3MDQ2MTE5Njd9.x0QmX8-Uw0Idq2d6MO6p9uHxd-1IashW5rp7GBHCwRw',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      getAllCategories();
+      const data = await res.json();
+      // console.log('data  ', data);
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
+  const getAllCategories = async () => {
+    try {
+      const res = await fetch('http://localhost:3005/api/category/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTlhM2E0MzIzMWZiYjIyNzAyZjNjMDUiLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE3MDQ2MTE5Njd9.x0QmX8-Uw0Idq2d6MO6p9uHxd-1IashW5rp7GBHCwRw',
+        },
+      });
+      const data = await res.json();
+      setAllCategoryData(data);
+      console.log('data  ', data);
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
+
+  console.log('allCategoryData    ', allCategoryData);
+
   return (
     <div className="flex flex-col px-12 w-full gap-5">
       <div className="px-12 bg-gray-100 py-7 rounded-2xl">
@@ -61,8 +118,9 @@ const NewCategory = () => {
                   <input
                     type="text"
                     placeholder="Enter Cantegory Name"
-                    id="category"
+                    id="name"
                     onChange={handleChnage}
+                    ref={nameInputRef}
                     autoComplete="category"
                     className="block w-full rounded-md border-0 px-5 py-3 text-gray-600 text-base font-medium shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -75,8 +133,9 @@ const NewCategory = () => {
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                   <textarea
+                    ref={descriptionInputRef}
                     onChange={handleChnage}
-                    id="message"
+                    id="description"
                     rows="4"
                     className="block w-full rounded-md border-0 px-5 py-3 text-gray-600 text-base font-medium shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Description about the category"
@@ -111,7 +170,7 @@ const NewCategory = () => {
       <div className=" py-7 rounded-2xl">
         <h3 className="py-4 text-2xl  font-bold  text-gray-700 ">Categories</h3>
         <div className="rounded-3xl overflow-x-auto">
-          <table class="w-full text-sm text-center rtl:text-right text-gray-500 ">
+          <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
             <thead class="text-xs text-gray-700 uppercase bg-gray-200 ">
               <tr className="py-10">
                 <th scope="col" class="px-6 py-3">
@@ -126,17 +185,16 @@ const NewCategory = () => {
               </tr>
             </thead>
             <tbody>
-              {dummyData.map((category, index) => {
+              {allCategoryData.map((category) => {
                 return (
-                  <tr class="bg-gray-100 border-b " key={index}>
-                    <th
-                      scope="row"
-                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
-                    >
-                      {index}
-                    </th>
-                    <td class="px-6 py-4">{category.name}</td>
-                    <td class="px-6 py-4">{category.description}</td>
+                  <tr class="bg-gray-100 border-b " key={category._id}>
+                    <td scope="row" class="px-6 py-4  ">
+                      {category._id}
+                    </td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                      {category.name}
+                    </td>
+                    <td class="px-6 py-4 ">{category.description}</td>
                   </tr>
                 );
               })}
