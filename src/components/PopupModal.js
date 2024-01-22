@@ -3,6 +3,7 @@ import UpdateProduct from '../sections/UpdateProduct';
 import NewProduct from '../sections/NewProduct';
 import OrderPreview from '../sections/OrderPreview';
 import NewCategory from '../sections/NewCategory';
+import ViewUser from '../sections/ViewUser';
 
 const PopupModel = ({ isOpened, handlePopupClose, modal }) => {
   return (
@@ -57,6 +58,8 @@ const PopupModel = ({ isOpened, handlePopupClose, modal }) => {
               <OrderPreview />
             ) : modal === 'newCategory' ? (
               <NewCategory />
+            ) : modal === 'viewUser' ? (
+              <ViewUser />
             ) : (
               ''
             )}
