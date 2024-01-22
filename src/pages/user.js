@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import PopupModal from '../components/PopupModal';
+import { addActiveUser } from '../store/reducers/userSlice';
+import { useDispatch } from 'react-redux';
 
 const tableHeaders = [
   { name: 'Image' },
@@ -18,6 +20,7 @@ const User = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [isPopupModelOpened, setIsPopupModelOpened] = useState(false);
   const [selectedWindow, setSelectedWindow] = useState('');
+  const dispatch = useDispatch();
 
   const toggleIsPopupModelOpened = (modal) => {
     setIsPopupModelOpened(!isPopupModelOpened);
@@ -40,7 +43,7 @@ const User = () => {
         );
         const data = await response.json();
         setAllUsers(data);
-        console.log('data   ', data);
+        // console.log('data   ', data);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -49,7 +52,7 @@ const User = () => {
     getAllProducts();
   }, []);
 
-  console.log('allUsers  -  ', allUsers);
+  //console.log('allUsers  -  ', allUsers);
 
   return (
     <>
@@ -83,7 +86,7 @@ const User = () => {
                   d="M12 4.5v15m7.5-7.5h-15"
                 />
               </svg>
-              New Usre
+              New User
             </button>
           </div>
         </div>
@@ -216,9 +219,10 @@ const User = () => {
                               src={user.profilePicture}
                               alt={user.name}
                               className="h-full w-full object-cover object-center cursor-pointer hover:scale-110 hover:rotate-6 transition-all"
-                              onClick={() =>
-                                toggleIsPopupModelOpened('viewUser')
-                              }
+                              onClick={() => {
+                                toggleIsPopupModelOpened('viewUser');
+                                dispatch(addActiveUser({ ...user }));
+                              }}
                             />
                           </div>
                         </td>

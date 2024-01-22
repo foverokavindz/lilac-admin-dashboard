@@ -47,7 +47,7 @@ const Order = () => {
     getAllOrders();
   }, []);
 
-  console.log('allOrders  ', allOrders);
+  //console.log('allOrders  ', allOrders);
 
   return (
     <>
