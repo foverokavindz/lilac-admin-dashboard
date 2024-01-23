@@ -8,6 +8,8 @@ import Overview from '../pages/overview';
 import Product from '../pages/product';
 import User from '../pages/user';
 import Help from '../pages/help';
+import SignIn from '../pages/SignIn';
+import PrivateRoute from '../components/PrivateRoute';
 
 const Dashboard = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -33,11 +35,14 @@ const Dashboard = () => {
           <ContentSpace>
             {
               <Routes>
-                <Route path="/" element={<Overview />} />
-                <Route path="/user" element={<User />} />
-                <Route path="/product" element={<Product />} />
-                <Route path="/order" element={<Order />} />
-                <Route path="/help" element={<Help />} />
+                <Route path="/sign-in" element={<SignIn />} />
+                <Route element={<PrivateRoute />}>
+                  <Route path="/" element={<Overview />} />
+                  <Route path="/user" element={<User />} />
+                  <Route path="/product" element={<Product />} />
+                  <Route path="/order" element={<Order />} />
+                  <Route path="/help" element={<Help />} />
+                </Route>
               </Routes>
             }
           </ContentSpace>
