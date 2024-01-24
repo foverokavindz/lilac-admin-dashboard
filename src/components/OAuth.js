@@ -35,7 +35,7 @@ const OAuth = () => {
         localStorage.setItem('lilac-auth-token', token);
       }
       dispatch(signInSuccess(data));
-      navigate('/');
+      navigate('/dashboard/overview');
     } catch (error) {
       console.log('Could not login with google', error);
     }
@@ -45,10 +45,10 @@ const OAuth = () => {
       <button
         onClick={handleGoogleClick}
         type="button"
-        class=" px-5 py-4  w-full text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm  text-center items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2"
+        className=" px-5 py-4  w-full text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm  text-center items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2"
       >
         <svg
-          class="w-4 h-4 me-2 inline-flex"
+          className="w-4 h-4 me-2 inline-flex"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
