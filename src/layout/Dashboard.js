@@ -13,16 +13,11 @@ import PrivateRoute from '../components/PrivateRoute';
 import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const { currentUser } = useSelector((state) => state.auth);
 
   return (
     <div className="flex flex-row h-screen">
-      <div
-        className={`${
-          isSidebarCollapsed ? 'w-24' : 'min-w-72'
-        }  overflow-hidden`}
-      >
+      <div className={`${currentUser ? 'min-w-72' : 'w-0'}  overflow-hidden`}>
         {/* sidebar */}
         {currentUser ? <Sidebar /> : ''}
       </div>

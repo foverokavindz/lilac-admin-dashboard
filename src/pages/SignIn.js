@@ -53,7 +53,7 @@ const SignIn = () => {
 
       dispatch(signInSuccess(data));
 
-      navigate('/dashboard/overview');
+      navigate('/');
     } catch (error) {
       console.log('error', error);
 
@@ -72,16 +72,19 @@ const SignIn = () => {
 
   return (
     <>
-      <div className="container mx-auto px-4 w-5/12 h-screen flex flex-col justify-center items-center">
+      <div className="container mx-auto px-4 w-5/12 py-5 flex flex-col justify-center items-center">
         <img
           src={logo}
-          className="object-cover rounded-lg w-56"
+          className="object-cover rounded-lg w-40"
           alt="Sing in form image"
         />
 
         <div className="w-full">
           <div className="my-7 flex flex-row justify-start items-center">
-            <h2 className="text-3xl font-semibold"> Sign In </h2>
+            <h2 className="text-2xl font-semibold ">
+              {' '}
+              Sign In to Admin Dashboard{' '}
+            </h2>
           </div>
           <div>
             <form onSubmit={handleSubmit}>
