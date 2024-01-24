@@ -35,7 +35,7 @@ const OAuth = () => {
         localStorage.setItem('lilac-auth-token', token);
       }
       dispatch(signInSuccess(data));
-      navigate('/');
+      navigate('/dashboard/overview');
     } catch (error) {
       console.log('Could not login with google', error);
     }

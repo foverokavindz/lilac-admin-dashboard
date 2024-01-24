@@ -53,7 +53,7 @@ const SignIn = () => {
 
       dispatch(signInSuccess(data));
 
-      navigate('/');
+      navigate('/dashboard/overview');
     } catch (error) {
       console.log('error', error);
 
