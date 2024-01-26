@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import OverviewCard from '../components/OverviewCard';
 import { UseSelector, useSelector } from 'react-redux';
 
@@ -28,9 +28,42 @@ const dummyData = [
     href: '/product',
   },
 ];
+const baseURL = 'http://localhost:3005/api';
+
+const fetchLinks = [
+  { link: `${baseURL}/user/count`, name: 'users' },
+  { link: `${baseURL}/order/count`, name: 'orders' },
+  { link: `${baseURL}/order/pending-total`, name: 'pending' },
+  { link: `${baseURL}/product/count`, name: 'products' },
+];
 
 const Overview = () => {
+  const [analyticData, setAnalyticData] = useState({
+    orders: null,
+    pending: null,
+    users: null,
+    products: null,
+  });
   const { currentUser } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    fetchLinks.map(async ({ link, name }) => {
+      try {
+        const response = await fetch(link);
+        const data = await response.json();
+        setAnalyticData((prevState) => ({
+          ...prevState,
+          [name]: data,
+        }));
+        //console.log('data   ', data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    });
+  }, []);
+
+  console.log('analyticData  ', analyticData);
+
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-row justify-between items-center w-full">
@@ -47,11 +80,29 @@ const Overview = () => {
         </div>
       </div>
       <div className="mt-10 flex flex-row flex-wrap gap-8 w-full justify-start ">
-        {dummyData.map(({ key, name, value, href }) => {
-          return (
-            <OverviewCard key={key} name={name} value={value} href={href} />
-          );
-        })}
+        <OverviewCard
+          name={'Orders'}
+          value={analyticData.orders}
+          href={'/order'}
+        />
+
+        <OverviewCard
+          name={'Users'}
+          value={analyticData.users}
+          href={'/user'}
+        />
+
+        <OverviewCard
+          name={'Products'}
+          value={analyticData.products}
+          href={'/product'}
+        />
+
+        <OverviewCard
+          name={'Pending Payments'}
+          value={'$' + analyticData.pending}
+          href={'/order'}
+        />
       </div>
     </div>
   );

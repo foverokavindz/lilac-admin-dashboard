@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const OverviewCard = ({ name, value, href }) => {
   const navigate = useNavigate();
   return (
-    <div className="w-60 px-7 py-5 bg-gray-200 rounded-2xl hover:bg-gray-300 transition-all hover:scale-105 hover:shadow-lg">
+    <div className="w-60 px-7 py-5 bg-gray-200 rounded-2xl hover:bg-gray-300 transition-all hover:scale-105 hover:shadow-lg flex flex-col justify-between">
       <div className="flex justify-between items-center">
         <p className="font-semibold text-xl text-gray-500 text-balance">
           {name}
