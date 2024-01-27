@@ -39,10 +39,10 @@ const fetchLinks = [
 
 const Overview = () => {
   const [analyticData, setAnalyticData] = useState({
-    orders: null,
-    pending: null,
-    users: null,
-    products: null,
+    orders: 0,
+    pending: 0,
+    users: 0,
+    products: 0,
   });
   const { currentUser } = useSelector((state) => state.auth);
 
