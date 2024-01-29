@@ -28,12 +28,12 @@ const Order = () => {
   useEffect(() => {
     const getAllOrders = async () => {
       try {
+        const token = localStorage.getItem('lilac-auth-token');
         const response = await fetch('http://localhost:3005/api/order', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'x-auth-token':
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTlhM2E0MzIzMWZiYjIyNzAyZjNjMDUiLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE3MDQ2MTE5Njd9.x0QmX8-Uw0Idq2d6MO6p9uHxd-1IashW5rp7GBHCwRw',
+            'x-auth-token': token,
           },
         });
         const data = await response.json();
@@ -267,6 +267,7 @@ const Order = () => {
         isOpened={isPopupModelOpened}
         handlePopupClose={toggleIsPopupModelOpened}
         modal={selectedWindow}
+        topic={"Order's Info "}
       />
     </>
   );

@@ -56,6 +56,7 @@ const productData = [
 const Product = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [isPopupModelOpened, setIsPopupModelOpened] = useState(false);
+  const [popupModalTopic, setPopupModalTopic] = useState('');
   const [selectedWindow, setSelectedWindow] = useState('');
   const dispatch = useDispatch();
 
@@ -97,7 +98,10 @@ const Product = () => {
           <div className="flex flex-row justify-between items-center gap-4">
             <button
               className="py-3 px-7 drop-shadow-lg bg-gray-800 text-white rounded-2xl text-base font-medium flex flex-row gap-3 items-center border-2 hover:bg-gray-100 hover:text-gray-800 border-gray-800 transition-all"
-              onClick={() => toggleIsPopupModelOpened('newCategory')}
+              onClick={() => {
+                toggleIsPopupModelOpened('newCategory');
+                setPopupModalTopic('Categories Overview');
+              }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +121,10 @@ const Product = () => {
             </button>
             <button
               className="py-3 px-7 drop-shadow-lg bg-gray-800 text-white rounded-2xl text-base font-medium flex flex-row gap-3 items-center border-2 hover:bg-gray-100 hover:text-gray-800 border-gray-800 transition-all"
-              onClick={() => toggleIsPopupModelOpened('newProduct')}
+              onClick={() => {
+                toggleIsPopupModelOpened('newProduct');
+                setPopupModalTopic('Add New Product');
+              }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -280,6 +287,7 @@ const Product = () => {
                             className="h-full w-full object-cover object-center cursor-pointer hover:scale-110 hover:rotate-6 transition-all"
                             onClick={() => {
                               toggleIsPopupModelOpened('productOverview');
+                              setPopupModalTopic('Product Overview');
                               dispatch(
                                 addActiveProduct({
                                   _id,
@@ -320,6 +328,8 @@ const Product = () => {
                         <a
                           onClick={() => {
                             toggleIsPopupModelOpened('updateProduct');
+                            setPopupModalTopic('Update Product Information');
+
                             dispatch(
                               addActiveProduct({
                                 _id,
@@ -370,6 +380,7 @@ const Product = () => {
         isOpened={isPopupModelOpened}
         handlePopupClose={toggleIsPopupModelOpened}
         modal={selectedWindow}
+        topic={popupModalTopic}
       />
     </>
   );
