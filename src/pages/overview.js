@@ -100,7 +100,7 @@ const Overview = () => {
 
         <OverviewCard
           name={'Pending Payments'}
-          value={'$' + analyticData.pending}
+          value={'$' + analyticData.pending.toFixed(2)}
           href={'/order'}
         />
       </div>
