@@ -16,7 +16,7 @@ const NewProduct = () => {
   const refimageThree = useRef(null);
 
   const [imageFeatured, setImage] = useState(undefined);
-  const [images, setImages] = useState(['', '', '']);
+  const [images, setImages] = useState([]);
   const [uploadPrecentage, setUploadPrecentage] = useState(0);
   const [categoryData, setCategoryData] = useState([]);
   const [imageError, setImageError] = useState(false);
@@ -46,9 +46,38 @@ const NewProduct = () => {
       isFeatured: isChecked,
       stock: formData,
       category: selectedCategories,
+      image: imageFeatured,
+      images,
     };
 
-    console.log('dataToSubmit    ', dataToSubmit);
+    const token = localStorage.getItem('lilac-auth-token');
+    //console.log('token', token);
+    try {
+      //dispatch(userUpdateStart());
+      const res = await fetch(`http://localhost:3005/api/product/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': token,
+        },
+        body: JSON.stringify(dataToSubmit),
+      });
+
+      const data = await res.json();
+
+      // if (data.success === false) {
+      //   dispatch(userUpdateFailure(data));
+      //   return;
+      // }
+
+      //dispatch(userUpdateSuccess(data));
+      console.log('data  ', data);
+    } catch (error) {
+      console.log('error', error);
+      // dispatch(userUpdateFailure(error));
+    }
+
+    //console.log('dataToSubmit    ', dataToSubmit);
   };
 
   const addColorFeild = () => {
@@ -88,7 +117,7 @@ const NewProduct = () => {
   const handleFileUpload = async (image, featured) => {
     // console.log('imageData', image);
     const storage = getStorage(app);
-    const fileName = 'productImage';
+    const fileName = 'image.name';
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, image);
     uploadTask.on(
@@ -112,9 +141,11 @@ const NewProduct = () => {
               console.log('downloadURL featured -  ', downloadURL);
             });
           }
-        : getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setImages((prevData) => [...prevData, downloadURL]);
-          })
+        : () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              setImages((prevData) => [...prevData, downloadURL]);
+            });
+          }
     );
   };
 
@@ -158,6 +189,7 @@ const NewProduct = () => {
   }, []);
 
   console.log('imageFeatured  ', imageFeatured);
+  console.log('images   ', images);
 
   return (
     <>
@@ -221,7 +253,7 @@ const NewProduct = () => {
                 <dt className="text-sm font-medium leading-6 text-gray-900">
                   Featured Image
                 </dt>
-                <dd className="relative mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                <dd className="relative mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 flex flex-row justify-start gap-28 items-center">
                   <div>
                     <img
                       src={
@@ -232,27 +264,14 @@ const NewProduct = () => {
                       alt="Profile picture"
                       width={'100px'}
                     />
-                    <div className="mt-3">
-                      {imageError ? (
-                        <p>
-                          Error uploading image (should be image file and less
-                          than 2 MB)
-                        </p>
-                      ) : uploadPrecentage > 0 && uploadPrecentage < 100 ? (
-                        <p>Uploading ... {uploadPrecentage}%</p>
-                      ) : uploadPrecentage === 100 ? (
-                        <p>Upload Successfully</p>
-                      ) : (
-                        ''
-                      )}
-                    </div>
+
                     <input
                       type="file"
                       ref={refFeatureImage}
                       hidden
                       accept="image/*"
                       onChange={(e) => {
-                        handleFileUpload(e.target.files[0]);
+                        handleFileUpload(e.target.files[0], true);
                       }}
                     />
                     <div className="t-0 absolute left-40 bottom-1  ">
@@ -276,6 +295,24 @@ const NewProduct = () => {
                         </svg>
                       </p>
                     </div>
+                  </div>
+                  <div className="mt-3 ">
+                    {imageError ? (
+                      <p>
+                        Error uploading image (should be image file and less
+                        than 2 MB)
+                      </p>
+                    ) : uploadPrecentage > 0 && uploadPrecentage < 100 ? (
+                      <p className="text-base text-gray-700 font-medium bg-gray-200 px-7 py-3 rounded-xl">
+                        Uploading ... {uploadPrecentage}%
+                      </p>
+                    ) : uploadPrecentage === 100 ? (
+                      <p className="text-base font-medium text-green-800 bg-green-300 px-7 py-3 rounded-xl">
+                        Upload Successfully
+                      </p>
+                    ) : (
+                      ''
+                    )}
                   </div>
                 </dd>
               </div>
