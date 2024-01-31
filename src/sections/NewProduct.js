@@ -117,7 +117,7 @@ const NewProduct = () => {
   const handleFileUpload = async (image, featured) => {
     // console.log('imageData', image);
     const storage = getStorage(app);
-    const fileName = 'image.name';
+    const fileName = image.name + Date.now();
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, image);
     uploadTask.on(
