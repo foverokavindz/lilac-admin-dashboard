@@ -4,7 +4,7 @@ import StockSizeInput from '../components/StockSizeInput';
 
 const NewProduct = () => {
   const [formData, setFormData] = useState([
-    { color: '', stock: [{ size: '', stock: 0 }] },
+    { color: '', sizeCount: [{ size: '', count: 0 }] },
   ]);
 
   // only chnage updated values
@@ -19,14 +19,17 @@ const NewProduct = () => {
   };
 
   const addColorFeild = () => {
-    let object = { color: '', stock: [{ size: '', stock: 0 }] };
+    let object = { color: '', sizeCount: [{ size: '', count: 0 }] };
     setFormData([...formData, object]);
   };
 
   const addStockSizeFeild = (index) => {
-    let object = { size: '', stock: 0 };
+    let object = { size: '', count: 0 };
     const updatedFormData = [...formData];
-    updatedFormData[index].stock = [...updatedFormData[index].stock, object];
+    updatedFormData[index].sizeCount = [
+      ...updatedFormData[index].sizeCount,
+      object,
+    ];
     setFormData(updatedFormData);
   };
 
@@ -38,13 +41,15 @@ const NewProduct = () => {
 
   const handleStockSizeChange = (index, indexTwo, event) => {
     let updatedFormData = [...formData];
-    updatedFormData[index].stock = [
-      ...updatedFormData[index].stock,
-      {
-        ...updatedFormData[index].stock[indexTwo],
-        [event.target.id]: event.target.value,
-      },
-    ];
+    let updatedStockSize = [...updatedFormData[index].sizeCount];
+    updatedStockSize[indexTwo][event.target.id] = event.target.value;
+
+    updatedFormData[index] = {
+      ...updatedFormData[index],
+      sizeCount: updatedStockSize,
+    };
+
+    setFormData(updatedFormData);
   };
 
   return (
@@ -71,7 +76,7 @@ const NewProduct = () => {
                           data={item.color}
                         />
 
-                        {item.stock.map((stockSize, indexSecond) => {
+                        {item.sizeCount.map((stockSize, indexSecond) => {
                           return (
                             <StockSizeInput
                               key={indexSecond}

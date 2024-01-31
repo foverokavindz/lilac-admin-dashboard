@@ -39,10 +39,10 @@ const StockSizeInput = ({
 
             <input
               type="text"
-              id="stock"
-              name="stock"
+              id="count"
+              name="count"
               className=" w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 "
-              value={data.stock}
+              value={data.count}
               placeholder="Stock"
               onChange={(e) => {
                 handleStockSizeChange(index, indexSecond, e);
