@@ -8,6 +8,7 @@ import {
   getDownloadURL,
 } from 'firebase/storage';
 import { app } from '../Firabase';
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 const NewProduct = () => {
   const refFeatureImage = useRef(null);
@@ -54,7 +55,7 @@ const NewProduct = () => {
     //console.log('token', token);
     try {
       //dispatch(userUpdateStart());
-      const res = await fetch(`http://localhost:3005/api/product/`, {
+      const res = await fetch(BASE_URL + `/product/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -166,7 +167,7 @@ const NewProduct = () => {
     const fetchCategoryData = async () => {
       try {
         // get category data
-        const response = await fetch('http://localhost:3005/api/category', {
+        const response = await fetch(BASE_URL + '/category', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

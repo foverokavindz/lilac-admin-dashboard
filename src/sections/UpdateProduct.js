@@ -7,6 +7,7 @@ import {
   getDownloadURL,
 } from 'firebase/storage';
 import { app } from '../Firabase';
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 const UpdateProduct = () => {
   const fileRef = useRef(null);
@@ -43,7 +44,7 @@ const UpdateProduct = () => {
     //console.log('token', token);
     try {
       //dispatch(userUpdateStart());
-      const res = await fetch(`http://localhost:3005/api/user/update`, {
+      const res = await fetch(BASE_URL + `/user/update`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -74,7 +75,7 @@ const UpdateProduct = () => {
     const fetchCategoryData = async () => {
       try {
         // get category data
-        const response = await fetch('http://localhost:3005/api/category', {
+        const response = await fetch(BASE_URL + '/category', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

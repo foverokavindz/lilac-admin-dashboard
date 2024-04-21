@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import PopupModal from '../components/PopupModal';
 import { addActiveOrder } from '../store/reducers/orderSlice';
 import { useDispatch } from 'react-redux';
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 const tableHeaders = [
   { name: 'Order Id' },
@@ -29,7 +30,7 @@ const Order = () => {
     const getAllOrders = async () => {
       try {
         const token = localStorage.getItem('lilac-auth-token');
-        const response = await fetch('http://localhost:3005/api/order', {
+        const response = await fetch(BASE_URL + '/order', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

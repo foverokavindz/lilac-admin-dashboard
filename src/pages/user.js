@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import PopupModal from '../components/PopupModal';
 import { addActiveUser } from '../store/reducers/userSlice';
 import { useDispatch } from 'react-redux';
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 const tableHeaders = [
   { name: 'Image' },
@@ -31,16 +32,13 @@ const User = () => {
     const getAllProducts = async () => {
       try {
         const token = localStorage.getItem('lilac-auth-token');
-        const response = await fetch(
-          'http://localhost:3005/api/user/allusers',
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              'x-auth-token': token,
-            },
-          }
-        );
+        const response = await fetch(BASE_URL + '/user/allusers', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-auth-token': token,
+          },
+        });
         const data = await response.json();
         setAllUsers(data);
         // console.log('data   ', data);

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 const dummyData = [
   {
@@ -59,7 +60,7 @@ const NewCategory = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:3005/api/category/', {
+      const res = await fetch(BASE_URL + '/category/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -79,7 +80,7 @@ const NewCategory = () => {
 
   const getAllCategories = async () => {
     try {
-      const res = await fetch('http://localhost:3005/api/category/', {
+      const res = await fetch(BASE_URL + '/category/', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

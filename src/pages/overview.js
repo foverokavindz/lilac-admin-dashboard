@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import OverviewCard from '../components/OverviewCard';
 import { UseSelector, useSelector } from 'react-redux';
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 const dummyData = [
   {
@@ -28,13 +29,12 @@ const dummyData = [
     href: '/product',
   },
 ];
-const baseURL = 'http://localhost:3005/api';
 
 const fetchLinks = [
-  { link: `${baseURL}/user/count`, name: 'users' },
-  { link: `${baseURL}/order/count`, name: 'orders' },
-  { link: `${baseURL}/order/pending-total`, name: 'pending' },
-  { link: `${baseURL}/product/count`, name: 'products' },
+  { link: `${BASE_URL}/user/count`, name: 'users' },
+  { link: `${BASE_URL}/order/count`, name: 'orders' },
+  { link: `${BASE_URL}/order/pending-total`, name: 'pending' },
+  { link: `${BASE_URL}/product/count`, name: 'products' },
 ];
 
 const Overview = () => {

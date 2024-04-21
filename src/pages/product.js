@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { addActiveProduct } from '../store/reducers/productSlice';
 import { useDispatch } from 'react-redux';
 import PopupModal from '../components/PopupModal';
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 const tableHeaders = [
   { name: 'Image' },
@@ -68,7 +69,7 @@ const Product = () => {
   useEffect(() => {
     const getAllProducts = async () => {
       try {
-        const response = await fetch('http://localhost:3005/api/product');
+        const response = await fetch(BASE_URL + '/product');
         const data = await response.json();
         setAllProducts(data);
         console.log('data   ', data);
